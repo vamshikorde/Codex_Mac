@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather Atlas</title>
+    <meta
+      name="description"
+      content="A simple static weather app with location search, current conditions, and a multi-day forecast."
+    />
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="page-shell">
+      <header class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow">Static Weather App</p>
+          <h1>Weather Atlas</h1>
+          <p class="hero-text">
+            Search for a city, choose a match, and get a clean forecast view that
+            works nicely as a GitHub Pages site.
+          </p>
+        </div>
+
+        <div class="search-panel">
+          <label class="search-label" for="location-search">Choose a location</label>
+          <div class="search-row">
+            <input
+              id="location-search"
+              class="search-input"
+              type="search"
+              placeholder="Try Hyderabad, London, or San Francisco"
+              autocomplete="off"
+            />
+            <button id="location-button" class="primary-button" type="button">
+              Search
+            </button>
+          </div>
+          <ul id="search-results" class="results-list" aria-live="polite"></ul>
+
+          <div class="quick-picks" aria-label="Popular cities">
+            <button class="quick-pick" type="button" data-city="Hyderabad">Hyderabad</button>
+            <button class="quick-pick" type="button" data-city="Bengaluru">Bengaluru</button>
+            <button class="quick-pick" type="button" data-city="New York">New York</button>
+            <button class="quick-pick" type="button" data-city="Tokyo">Tokyo</button>
+          </div>
+        </div>
+      </header>
+
+      <main class="dashboard">
+        <section class="overview-card">
+          <div class="overview-meta">
+            <p id="location-name" class="location-name">Loading forecast...</p>
+            <p id="location-detail" class="location-detail">Fetching weather data</p>
+          </div>
+
+          <div class="overview-main">
+            <div>
+              <p id="weather-label" class="weather-label">Preparing forecast</p>
+              <div class="temperature-row">
+                <span id="current-temperature" class="current-temperature">--</span>
+                <span class="unit">deg C</span>
+              </div>
+            </div>
+
+            <div class="weather-icon-wrap">
+              <span id="weather-icon" class="weather-icon" aria-hidden="true">☀️</span>
+            </div>
+          </div>
+
+          <div class="metrics-grid">
+            <article class="metric-card">
+              <p class="metric-label">Feels like</p>
+              <p id="feels-like" class="metric-value">--</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Humidity</p>
+              <p id="humidity" class="metric-value">--</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Wind</p>
+              <p id="wind-speed" class="metric-value">--</p>
+            </article>
+            <article class="metric-card">
+              <p class="metric-label">Precipitation</p>
+              <p id="precipitation" class="metric-value">--</p>
+            </article>
+          </div>
+        </section>
+
+        <section class="section-band">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">Next 6 Days</p>
+              <h2>Forecast outlook</h2>
+            </div>
+            <p id="updated-at" class="updated-at">Last updated: --</p>
+          </div>
+          <div id="forecast-grid" class="forecast-grid"></div>
+        </section>
+
+        <section class="section-band tips-band">
+          <div class="section-header">
+            <div>
+              <p class="section-kicker">Why this stack</p>
+              <h2>GitHub Pages friendly</h2>
+            </div>
+          </div>
+          <div class="tips-grid">
+            <article class="tip-card">
+              <p class="tip-title">No backend</p>
+              <p class="tip-copy">Everything runs in the browser, so deployment stays simple.</p>
+            </article>
+            <article class="tip-card">
+              <p class="tip-title">No API secret</p>
+              <p class="tip-copy">The app uses a public weather API that is safe for static hosting.</p>
+            </article>
+            <article class="tip-card">
+              <p class="tip-title">Portable</p>
+              <p class="tip-copy">These files can live in any GitHub repo and publish through Pages.</p>
+            </article>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="forecast-card-template">
+      <article class="forecast-card">
+        <p class="forecast-day"></p>
+        <p class="forecast-icon" aria-hidden="true"></p>
+        <p class="forecast-summary"></p>
+        <div class="forecast-temps">
+          <span class="forecast-high"></span>
+          <span class="forecast-low"></span>
+        </div>
+        <p class="forecast-rain"></p>
+      </article>
+    </template>
+
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
